@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bebidas - Sushi Kito</title>
+    <link rel="stylesheet" href="stilomenu.css">
+    <link rel="icon" href="carrito.png" type="image/x-icon">
+    <style>
+        #contenido-carrito {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Incluye el padding y border en el ancho total */
+        }
+
+        #contenido-carrito ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #contenido-carrito li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #total-acumulado {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        #mensaje-carrito {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+            max-width: 150px;
+            text-align: center;
+        }
+
+        .mostrar {
+            display: block !important;
+        }
+
+        /* Nuevo botón */
+        .boton-compra {
+            display: block;
+            width: calc(100% - 20px); /* Ajustar el ancho para que no se salga del borde */
+            padding: 10px;
+            background-color: #00ff37ab;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            text-decoration: none; /* Sin subrayado */
+            box-sizing: border-box; /* Incluye el padding en el ancho total */
+        }
+
+        .boton-compra:hover {
+            background-color: #ff7700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de Sushi Kito">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="bebidas.html">Bebidas</a></li>
+                <li><a href="postres.html">Postres</a></li>
+                <li><a href="dulce.html">Dulces</a></li>
+            </ul>
+        </nav>
+        <div id="carrito">
+            <img src="carrito.png" alt="Carrito" id="icono-carrito" style="width: 40px; cursor: pointer;">
+            <span id="total-carrito">$0.00</span>
+        </div>
+    </header>
+
+    <section id="bebidas">
+        <h1 class="titulo-menu">Bebidas Tradicionales de Japón</h1>
+
+        <div class="menu-item">
+            <img src="Sake.jpeg" alt="Sake">
+            <h3>Sake</h3>
+            <p>Bebida alcohólica de arroz fermentado, servida caliente o fría.</p>
+            <div class="precio" onclick="agregarAlCarrito(5.00, 'Sake')">Precio: $5.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="te verde.jpeg" alt="Té Verde">
+            <h3>Té Verde (Ocha)</h3>
+            <p>Infusión ligera y refrescante, ideal para acompañar sushi.</p>
+            <div class="precio" onclick="agregarAlCarrito(3.50, 'Té Verde')">Precio: $3.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Shochu.jpeg" alt="Shochu">
+            <h3>Shochu</h3>
+            <p>Licor destilado japonés a base de arroz, cebada o batatas, más suave que el sake.</p>
+            <div class="precio" onclick="agregarAlCarrito(6.00, 'Shochu')">Precio: $6.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Umeshu.jpeg" alt="Umeshu">
+            <h3>Umeshu</h3>
+            <p>Licor dulce de ciruela, perfecto para acompañar platos ligeros.</p>
+            <div class="precio" onclick="agregarAlCarrito(4.00, 'Umeshu')">Precio: $4.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Cerveza Japonesa.jpeg" alt="Cerveza Japonesa">
+            <h3>Cerveza Japonesa</h3>
+            <p>Marcas como Asahi, Kirin y Sapporo, ligeras y refrescantes.</p>
+            <div class="precio" onclick="agregarAlCarrito(2.50, 'Cerveza Japonesa')">Precio: $2.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Chuhai.jpeg" alt="Chuhai">
+            <h3>Chuhai</h3>
+            <p>Cóctel hecho con shochu y jugo de frutas, refrescante y delicioso.</p>
+            <div class="precio" onclick="agregarAlCarrito(3.00, 'Chuhai')">Precio: $3.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Calpis.jpeg" alt="Calpis">
+            <h3>Calpis</h3>
+            <p>Bebida láctea fermentada, dulce y suave, a menudo servida con soda.</p>
+            <div class="precio" onclick="agregarAlCarrito(3.50, 'Calpis')">Precio: $3.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Ramune.jpeg" alt="Ramune">
+            <h3>Ramune</h3>
+            <p>Gaseosa dulce con un envase peculiar, ideal para niños y adultos.</p>
+            <div class="precio" onclick="agregarAlCarrito(2.00, 'Ramune')">Precio: $2.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Té de Cebada (Mugicha).jpeg" alt="Té de Cebada">
+            <h3>Té de Cebada (Mugicha)</h3>
+            <p>Infusión fría y sin cafeína, popular en verano.</p>
+            <div class="precio" onclick="agregarAlCarrito(1.50, 'Té de Cebada')">Precio: $1.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Amazake.jpeg" alt="Amazake">
+            <h3>Amazake</h3>
+            <p>Bebida dulce hecha de arroz fermentado, con o sin alcohol.</p>
+            <div class="precio" onclick="agregarAlCarrito(4.50, 'Amazake')">Precio: $4.50</div>
+        </div>
+    </section>
+
+    <footer>
+        <h3 class="texto-footer">¡Síguenos en nuestras redes sociales!</h3>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/sushi_kit0"><img src="instagram_1384063.png" alt="Instagram"></a>
+        </div>
+    </footer>
+
+    <!-- Mensaje de carrito -->
+    <div id="mensaje-carrito"></div>
+
+    <!-- Contenido del carrito -->
+    <div id="contenido-carrito">
+        <h2>Contenido del Carrito</h2>
+        <ul id="lista-carrito"></ul>
+        <p>Total: <span id="total-acumulado">$0.00</span></p>
+        <!-- Botón de realizar compra como enlace -->
+        <a href="pago.html" class="boton-compra">Realizar Compra</a>
+    </div>
+
+    <script>
+        const mensajeCarrito = document.getElementById('mensaje-carrito');
+        const totalCarrito = document.getElementById('total-carrito');
+        const listaCarrito = document.getElementById('lista-carrito');
+        const totalFinal = document.getElementById('total-acumulado');
+        const contenidoCarrito = document.getElementById('contenido-carrito');
+
+        let total = 0;
+        let carritoItems = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        // Al cargar la página, actualizar el carrito
+        window.onload = function() {
+            carritoItems.forEach(item => total += item.precio);
+            totalCarrito.textContent = `$${total.toFixed(2)}`;
+            actualizarCarrito();
+        };
+
+        function agregarAlCarrito(precio, nombre) {
+            total += precio;
+            totalCarrito.textContent = `$${total.toFixed(2)}`;
+            carritoItems.push({ nombre, precio });
+            actualizarCarrito();
+            mostrarMensajeCarrito(nombre, precio);
+            guardarCarrito();
+        }
+
+        function actualizarCarrito() {
+            listaCarrito.innerHTML = ''; // Limpiar lista antes de actualizar
+            carritoItems.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.nombre} - $${item.precio.toFixed(2)}`;
+                const eliminarBtn = document.createElement('button');
+                eliminarBtn.textContent = 'Eliminar';
+                eliminarBtn.onclick = () => eliminarDelCarrito(index);
+                li.appendChild(eliminarBtn);
+                listaCarrito.appendChild(li);
+            });
+            totalFinal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function eliminarDelCarrito(index) {
+            const item = carritoItems[index];
+            total -= item.precio;
+            carritoItems.splice(index, 1);
+            totalCarrito.textContent = `$${total.toFixed(2)}`;
+            actualizarCarrito();
+            guardarCarrito();
+            mostrarMensajeCarrito('Producto eliminado', 0);
+        }
+
+        function guardarCarrito() {
+            localStorage.setItem('carrito', JSON.stringify(carritoItems));
+        }
+
+        document.getElementById('icono-carrito').addEventListener('click', () => {
+            contenidoCarrito.style.display = contenidoCarrito.style.display === 'none' ? 'block' : 'none';
+        });
+
+        function mostrarMensajeCarrito(nombre, precio) {
+            mensajeCarrito.textContent = `Se agregó al carrito: ${nombre} - $${precio.toFixed(2)}`;
+            mensajeCarrito.classList.add('mostrar');
+            setTimeout(() => {
+                mensajeCarrito.classList.remove('mostrar');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

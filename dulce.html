@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulces - Sushi Kito</title>
+    <link rel="stylesheet" href="stilomenu.css">
+    <link rel="icon" href="carrito.png" type="image/x-icon">
+    <style>
+        /* CSS para la página de dulces */
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #b22222;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #b22222;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 120px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: rgb(250, 247, 247);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #111110;
+            transform: scale(1.1);
+        }
+
+        #dulces {
+            text-align: center;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .menu-item {
+            margin: 20px;
+            display: inline-block;
+            width: 200px;
+            transition: transform 0.3s ease;
+            height: 270px;
+            position: relative;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-item .precio {
+            visibility: hidden;
+            margin-top: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            opacity: 0;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            transition: visibility 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-item:hover .precio {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .social-icons img {
+            width: 40px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        #mensaje-carrito {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+        }
+
+        #contenido-carrito {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #contenido-carrito ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #contenido-carrito li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #total-acumulado {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* Nuevo botón */
+        .boton-compra {
+            display: block;
+            width: calc(100% - 20px); /* Ajustar el ancho para que no se salga del borde */
+            padding: 10px;
+            background-color: #00ff37ab;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            text-decoration: none; /* Sin subrayado */
+            box-sizing: border-box; /* Incluye el padding en el ancho total */
+        }
+
+        .boton-compra:hover {
+            background-color: #ff7700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de Sushi Kito">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="bebidas.html">Bebidas</a></li>
+                <li><a href="postres.html">Postres</a></li>
+                <li><a href="dulce.html">Dulces</a></li>
+            </ul>
+        </nav>
+        <div id="carrito">
+            <img src="carrito.png" alt="Carrito" id="icono-carrito" style="width: 40px; cursor: pointer;">
+            <span id="total-carrito">$0.00</span>
+        </div>
+    </header>
+
+    <section id="dulces">
+        <h1 class="titulo-menu">Dulces Tradicionales de Japón</h1>
+
+        <div class="menu-item">
+            <img src="Mochi dulce.jpeg" alt="Mochi">
+            <h3>Mochi</h3>
+            <p>Pastelito de arroz glutinoso, suave y delicioso, a menudo relleno de anko (pasta de frijol dulce).</p>
+            <div class="precio" onclick="agregarAlCarrito(2.50, 'Mochi')">Precio: $2.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Dango.jpeg" alt="Dango">
+            <h3>Dango</h3>
+            <p>Brochetas de bolitas de arroz, a menudo cubiertas con salsa dulce.</p>
+            <div class="precio" onclick="agregarAlCarrito(3.00, 'Dango')">Precio: $3.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Wagashi.jpeg" alt="Wagashi">
+            <h3>Wagashi</h3>
+            <p>Dulces tradicionales japoneses que vienen en diversas formas y sabores.</p>
+            <div class="precio" onclick="agregarAlCarrito(4.00, 'Wagashi')">Precio: $4.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Taiyaki dulce.jpeg" alt="Taiyaki">
+            <h3>Taiyaki</h3>
+            <p>Pastelito en forma de pez, relleno de anko, crema o chocolate.</p>
+            <div class="precio" onclick="agregarAlCarrito(3.50, 'Taiyaki')">Precio: $3.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Pocky.jpeg" alt="Pocky">
+            <h3>Pocky</h3>
+            <p>Palitos de galleta cubiertos de chocolate o sabores variados.</p>
+            <div class="precio" onclick="agregarAlCarrito(2.00, 'Pocky')">Precio: $2.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Dorayaki dulce.jpeg" alt="Dorayaki">
+            <h3>Dorayaki</h3>
+            <p>Pastelitos de dos pancakes rellenos de anko, muy populares.</p>
+            <div class="precio" onclick="agregarAlCarrito(3.00, 'Dorayaki')">Precio: $3.00</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Dulces Japoneses.jpeg" alt="Dulces Japoneses">
+            <h3>Dulces Japoneses</h3>
+            <p>Variedad de caramelos y golosinas tradicionales de Japón.</p>
+            <div class="precio" onclick="agregarAlCarrito(1.50, 'Dulces Japoneses')">Precio: $1.50</div>
+        </div>
+
+        <div class="menu-item">
+            <img src="Neriguri.jpeg" alt="Neriguri">
+            <h3>Neriguri</h3>
+            <p>Gomas de azúcar que se pueden moldear en diversas formas.</p>
+            <div class="precio" onclick="agregarAlCarrito(2.50, 'Neriguri')">Precio: $2.50</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>¡Síguenos en nuestras redes sociales!</p>
+        <div class="social-icons">
+            <a href="#"><img src="instagram_1384063.png" alt="https://www.instagram.com/sushi_kit0"></a>
+        </div>
+    </footer>
+
+    <!-- Mensaje de carrito -->
+    <div id="mensaje-carrito">Artículo agregado al carrito!</div>
+
+    <!-- Contenido del carrito -->
+    <div id="contenido-carrito">
+        <h3>Contenido del Carrito</h3>
+        <ul id="lista-carrito"></ul>
+        <div id="total-acumulado">Total: $0.00</div>
+        <a href="pago.html" class="boton-compra">Realizar Compra</a> <!-- Botón agregado -->
+    </div>
+
+    <script>
+        const mensajeCarrito = document.getElementById('mensaje-carrito');
+        const totalCarrito = document.getElementById('total-carrito');
+        const listaCarrito = document.getElementById('lista-carrito');
+        const contenidoCarrito = document.getElementById('contenido-carrito');
+
+        let total = 0;
+        let carritoItems = [];
+
+        // Al cargar la página, actualizar el carrito con los datos de LocalStorage
+        window.onload = function() {
+            const storedCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carritoItems = storedCarrito;
+            total = carritoItems.reduce((acc, item) => acc + item.precio, 0);
+            totalCarrito.textContent = `$${total.toFixed(2)}`;
+            actualizarCarrito();
+        };
+
+        function agregarAlCarrito(precio, nombre) {
+            total += precio;
+            totalCarrito.textContent = `$${total.toFixed(2)}`;
+            carritoItems.push({ nombre, precio });
+            actualizarCarrito();
+            mostrarMensajeCarrito(nombre, precio);
+            guardarCarrito();
+        }
+
+        function actualizarCarrito() {
+            listaCarrito.innerHTML = '';
+            carritoItems.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.nombre} - $${item.precio.toFixed(2)}`;
+                const eliminarBtn = document.createElement('button');
+                eliminarBtn.textContent = 'Eliminar';
+                eliminarBtn.onclick = () => eliminarDelCarrito(index);
+                li.appendChild(eliminarBtn);
+                listaCarrito.appendChild(li);
+            });
+            document.getElementById('total-acumulado').textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function eliminarDelCarrito(index) {
+            const item = carritoItems[index];
+            total -= item.precio;
+            carritoItems.splice(index, 1);
+            totalCarrito.textContent = `$${total.toFixed(2)}`;
+            actualizarCarrito();
+            guardarCarrito();
+            mostrarMensajeCarrito('Producto eliminado', 0);
+        }
+
+        function guardarCarrito() {
+            localStorage.setItem('carrito', JSON.stringify(carritoItems));
+        }
+
+        document.getElementById('icono-carrito').addEventListener('click', () => {
+            contenidoCarrito.style.display = contenidoCarrito.style.display === 'none' ? 'block' : 'none';
+        });
+
+        function mostrarMensajeCarrito(nombre, precio) {
+            mensajeCarrito.textContent = `Se agregó al carrito: ${nombre} - $${precio.toFixed(2)}`;
+            mensajeCarrito.style.display = 'block';
+            setTimeout(() => {
+                mensajeCarrito.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

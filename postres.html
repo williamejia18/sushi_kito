@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postres - Sushi Kito</title>
+    <link rel="stylesheet" href="postre.css">
+    <link rel="icon" href="carrito.png" type="image/x-icon">
+    <style>
+        #contenido-carrito {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #contenido-carrito ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #contenido-carrito li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Alinear verticalmente */
+            margin-bottom: 10px;
+        }
+
+        #total-acumulado {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        #mensaje-carrito {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+            max-width: 150px;
+            text-align: center;
+        }
+
+        .mostrar {
+            display: block !important;
+        }
+
+        .boton-compra {
+            display: block;
+            width: calc(100% - 20px);
+            padding: 10px;
+            background-color: #13ff13b6;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .boton-compra:hover {
+            background-color: #72ff15;
+        }
+
+        .boton-eliminar {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .boton-eliminar:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de Sushi Kito">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="bebidas.html">Bebidas</a></li>
+                <li><a href="dulce.html">Dulces</a></li>
+            </ul>
+        </nav>
+        <div id="carrito">
+            <img src="carrito.png" alt="Carrito" id="icono-carrito" style="width: 40px; cursor: pointer;">
+            <span id="total-carrito">$0.00</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <section id="postres">
+            <center><h1 class="titulo-menu">Postres Tradicionales de Japón</h1></center>
+
+            <div class="menu-item">
+                <img src="Mochi.jpeg" alt="Mochi">
+                <h3>Mochi</h3>
+                <p>Delicioso pastelito de arroz glutinoso, relleno de pasta de frijol dulce.</p>
+                <div class="precio" onclick="agregarAlCarrito(2.50, 'Mochi')">Precio: $2.50</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Dorayaki.jpeg" alt="Dorayaki">
+                <h3>Dorayaki</h3>
+                <p>Panqueque relleno de pasta de frijol rojo dulce, perfecto para el té.</p>
+                <div class="precio" onclick="agregarAlCarrito(3.00, 'Dorayaki')">Precio: $3.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Taiyaki.jpeg" alt="Taiyaki">
+                <h3>Taiyaki</h3>
+                <p>Pastelito en forma de pez, relleno de frijol dulce, crema o chocolate.</p>
+                <div class="precio" onclick="agregarAlCarrito(4.00, 'Taiyaki')">Precio: $4.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Kakigori.jpeg" alt="Kakigori">
+                <h3>Kakigori</h3>
+                <p>Postre de hielo raspado, bañado en jarabes de frutas o leche condensada.</p>
+                <div class="precio" onclick="agregarAlCarrito(3.50, 'Kakigori')">Precio: $3.50</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Tarta de Matcha.jpeg" alt="Tarta de Matcha">
+                <h3>Tarta de Matcha</h3>
+                <p>Deliciosa tarta esponjosa con el distintivo sabor del té matcha.</p>
+                <div class="precio" onclick="agregarAlCarrito(4.50, 'Tarta de Matcha')">Precio: $4.50</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Anmitsu.jpeg" alt="Anmitsu">
+                <h3>Anmitsu</h3>
+                <p>Postre japonés que combina gelatina, frijoles rojos y frutas.</p>
+                <div class="precio" onclick="agregarAlCarrito(5.00, 'Anmitsu')">Precio: $5.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Yokan.jpeg" alt="Yokan">
+                <h3>Yokan</h3>
+                <p>Dulce de gelatina a base de frijol rojo, a menudo servido en bloques.</p>
+                <div class="precio" onclick="agregarAlCarrito(2.00, 'Yokan')">Precio: $2.00</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Sakura Mochi.jpeg" alt="Sakura Mochi">
+                <h3>Sakura Mochi</h3>
+                <p>Delicioso mochi envuelto en hoja de cerezo, un postre primaveral.</p>
+                <div class="precio" onclick="agregarAlCarrito(3.50, 'Sakura Mochi')">Precio: $3.50</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Kuzumochi.jpeg" alt="Kuzumochi">
+                <h3>Kuzumochi</h3>
+                <p>Postre gelatinoso hecho de almidón de kuzu, servido con jarabe dulce.</p>
+                <div class="precio" onclick="agregarAlCarrito(2.50, 'Kuzumochi')">Precio: $2.50</div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Anpan.jpeg" alt="Anpan">
+                <h3>Anpan</h3>
+                <p>Panecillo relleno de crema dulce o frijoles rojos, un favorito japonés.</p>
+                <div class="precio" onclick="agregarAlCarrito(3.00, 'Anpan')">Precio: $3.00</div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <h3 class="texto-footer">¡Síguenos en nuestras redes sociales!</h3>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/sushi_kit0"><img src="instagram_1384063.png" alt="Instagram"></a>
+        </div>
+    </footer>
+
+    <!-- Mensaje de carrito -->
+    <div id="mensaje-carrito"></div>
+
+    <!-- Contenido del carrito -->
+    <div id="contenido-carrito">
+        <h2>Contenido del Carrito</h2>
+        <ul id="lista-carrito"></ul>
+        <p>Total: <span id="total-acumulado">$0.00</span></p>
+        <a href="realizar-compra.html" class="boton-compra">Realizar Compra</a>
+    </div>
+    
+    <script src="carrito.js"></script>
+</body>
+</html>

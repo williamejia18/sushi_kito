@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Sushi Kito</title>
+    <link rel="stylesheet" href="stilomenu.css">
+    <link rel="icon" href="carrito.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #b22222;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+        }
+        .logo img {
+            width: 120px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #ddd;
+        }
+        #checkout {
+            padding: 20px;
+            background-color: white;
+            text-align: center;
+            max-width: 600px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .ubicacion-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            padding: 10px;
+            background-color: #b22222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #a51a1a;
+        }
+        .btn-pequeno {
+            padding: 5px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav ul {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                padding: 0;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            #checkout {
+                width: 90%; /* Menor ancho en móviles */
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de Sushi Kito">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="bebidas.html">Bebidas</a></li>
+                <li><a href="postres.html">Postres</a></li>
+                <li><a href="dulce.html">Dulces</a></li>
+            </ul>
+        </nav>
+        <div id="carrito">
+            <img src="carrito.png" alt="Carrito" id="icono-carrito" style="width: 40px; cursor: pointer;">
+            <span id="total-carrito">$0.00</span>
+        
+        </div>
+    </header>
+
+    <section id="checkout">
+        <h1>Detalles de la Compra</h1>
+        <form id="formulario-checkout">
+            <input type="text" placeholder="Nombre Completo" required>
+            <input type="email" placeholder="Correo Electrónico" required>
+            <input type="tel" placeholder="Teléfono" required pattern="[0-9]{10}" title="Ingrese un número de teléfono válido (10 dígitos)" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+            
+            <label for="direccion">Dirección de Envío</label>
+            <input type="text" id="direccion" placeholder="Ingrese su dirección" required>
+            <div class="ubicacion-container">
+                <button type="button" class="btn-pequeno" onclick="usarUbicacion()">Usar mi ubicación</button>
+            </div>
+            
+            <input type="text" placeholder="Número de Tarjeta" required pattern="[0-9]{16}" title="Ingrese un número de tarjeta válido (16 dígitos)" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+            <input type="text" placeholder="Fecha de Expiración (MM/AA)" required pattern="\d{2}/\d{2}" title="Formato: MM/AA" oninput="this.value=this.value.replace(/[^0-9/]/g,'');">
+            <input type="text" placeholder="CVV" required pattern="[0-9]{3}" title="Ingrese un CVV válido (3 dígitos)" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+            <button type="submit">Finalizar Compra</button>
+        </form>
+    </section>
+
+    <footer>
+        <h3>¡Síguenos en nuestras redes sociales!</h3>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/sushi_kit0"><img src="instagram_1384063.png" alt="Instagram" style="width: 40px;"></a>
+        </div>
+    </footer>
+
+    <script>
+        // Cargar dirección desde sessionStorage al cargar la página
+        window.onload = function() {
+            const direccionGuardada = sessionStorage.getItem('direccion');
+            if (direccionGuardada) {
+                document.getElementById('direccion').value = direccionGuardada;
+            }
+        };
+
+        function usarUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const apiKey = 'TU_API_KEY'; // Reemplaza con tu API Key de Google
+                    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${apiKey}`;
+
+                    fetch(geocodeUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.results.length > 0) {
+                                const direccion = data.results[0].formatted_address;
+                                document.getElementById('direccion').value = direccion;
+                                sessionStorage.setItem('direccion', direccion); // Guardar en sessionStorage
+                            } else {
+                                alert('No se pudo obtener la dirección.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener la dirección:', error);
+                        });
+                }, function() {
+                    alert('No se pudo obtener la ubicación. Asegúrate de que los permisos de geolocalización estén habilitados.');
+                });
+            } else {
+                alert('La geolocalización no es compatible con este navegador.');
+            }
+        }
+
+        document.getElementById('formulario-checkout').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Compra finalizada. ¡Gracias por tu pedido!');
+            sessionStorage.removeItem('direccion'); // Eliminar la dirección al finalizar la compra
+            this.reset(); // Resetea el formulario después de enviar
+        });
+
+        // Función para cargar datos del carrito
+        function cargarCarrito() {
+            const carritoItems = JSON.parse(localStorage.getItem('carrito')) || [];
+            const total = carritoItems.reduce((acc, item) => acc + item.precio, 0);
+            document.getElementById('total-carrito').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Cargar datos del carrito al iniciar la página
+        window.onload = cargarCarrito;
+
+        // Función para iniciar el proceso de pago
+        document.getElementById('btn-pago').addEventListener('click', function() {
+            window.location.href = 'checkout.html'; // Cambia esto por la ruta correcta de la página de pago
+        });
+    </script>
+</body>
+</html>
