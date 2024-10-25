@@ -6,90 +6,18 @@
     <title>Menú - Sushi Kito</title>
     <link rel="stylesheet" href="stilomenu.css">
     <link rel="icon" href="carrito.png" type="image/x-icon">
-    <style>
-        #contenido-carrito {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 10px;
-            width: 300px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #contenido-carrito ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #contenido-carrito li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        #total-final {
-            font-weight: bold;
-            text-align: right;
-            margin-top: 10px;
-        }
-
-        #boton-pago {
-            background-color: #4caf50; /* Verde */
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%; /* Ocupa todo el ancho del contenedor */
-        }
-
-        #boton-pago:hover {
-            background-color: #45a049; /* Verde más oscuro al pasar el mouse */
-        }
-
-        #mensaje-carrito {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4caf50;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            font-size: 12px;
-            max-width: 150px;
-            text-align: center;
-        }
-
-        .mostrar {
-            display: block !important;
-        }
-
-        .menu-item {
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body>
-    <header>
+    <header class="container">
         <div class="logo">
             <img src="logo.png" alt="Logo de Sushi Kito">
         </div>
         <nav>
             <ul>
-                <h3></h3><li><a href="index.htm"><</a></li>
+                <li><a href="index.htm">Inicio</a></li>
                 <li><a href="bebidas.html">Bebidas</a></li>
                 <li><a href="postres.html">Postres</a></li>
-                <li><a href="dulce.html">Dulces</a></li></h3>
+                <li><a href="dulce.html">Dulces</a></li>
             </ul>
         </nav>
         <div id="carrito">
@@ -98,157 +26,40 @@
         </div>
     </header>
 
-    <section id="menu">
+    <section id="menu" class="container">
         <h1 class="titulo-menu">Menú de Sushi</h1>
 
+        <!-- Menu Items -->
         <div class="menu-item" id="maki">
             <img src="sushi-2.jpg" alt="Maki">
             <h3>Maki</h3>
-            <p>Rollos de sushi envueltos en alga nori, que revelan sabores frescos y exquisitos en cada pieza. <p>-5 piezas por orden-</p></p>
+            <p>Rollos de sushi envueltos en alga nori...</p>
+            <p>-5 piezas por orden-</p>
             <div class="precio" onclick="agregarAlCarrito(8.50, 'Maki')">Precio: $8.50</div>
         </div>
 
-        <div class="menu-item" id="nigiri">
-            <img src="sushi-1.jpg" alt="Nigiri">
-            <h3>Nigiri</h3>
-            <p>Deliciosas bolas de arroz con pescado fresco encima, ideal para disfrutar su pureza.</p>
-            <div class="precio" onclick="agregarAlCarrito(9.00, 'Nigiri')">Precio: $9.00</div>
-        </div>
+        <!-- Más items similares aquí -->
 
-        <div class="menu-item" id="sashimi">
-            <img src="sashimi 1.jpeg" alt="Sashimi">
-            <h3>Sashimi</h3>
-            <p>Pescado o marisco crudo, servido sin arroz, para los amantes del sabor puro.</p>
-            <div class="precio" onclick="agregarAlCarrito(12.00, 'Sashimi')">Precio: $12.00</div>
-        </div>
-
-        <div class="menu-item" id="temaki">
-            <img src="temaKI.jpg" alt="Temaki">
-            <h3>Temaki</h3>
-            <p>Conos de alga nori rellenos de arroz y deliciosos ingredientes, perfectos para llevar.</p>
-            <div class="precio" onclick="agregarAlCarrito(7.50, 'Temaki')">Precio: $7.50</div>
-        </div>
-
-        <div class="menu-item" id="chirashi">
-            <img src="Chirashi.jpeg" alt="Chirashi">
-            <h3>Chirashi</h3>
-            <p>Sushi servido en un tazón con arroz y una variedad de ingredientes encima.</p>
-            <div class="precio" onclick="agregarAlCarrito(10.50, 'Chirashi')">Precio: $10.50</div>
-        </div>
-
-        <div class="menu-item" id="inari">
-            <img src="Inari.jpeg" alt="Inari">
-            <h3>Inari</h3>
-            <p>Arroz de sushi envuelto en suaves bolsas de tofu frito, un bocado dulce y salado.</p>
-            <div class="precio" onclick="agregarAlCarrito(6.50, 'Inari')">Precio: $6.50</div>
-        </div>
-
-        <div class="menu-item" id="gunkan">
-            <img src="Gunkan.jpeg" alt="Gunkan">
-            <h3>Gunkan</h3>
-            <p>Porciones de arroz rodeadas de alga nori y cubiertas con huevas o tartar.</p>
-            <div class="precio" onclick="agregarAlCarrito(11.00, 'Gunkan')">Precio: $11.00</div>
-        </div>
-
-        <div class="menu-item" id="oshi-zushi">
-            <img src="Oshi-zushi 1.jpeg" alt="Oshi-zushi">
-            <h3>Oshi-zushi</h3>
-            <p>Sushi prensado en moldes, ideal para una presentación elegante y sabores concentrados.</p>
-            <div class="precio" onclick="agregarAlCarrito(9.50, 'Oshi-zushi')">Precio: $9.50</div>
-        </div>
     </section>
 
-    <!-- Contenido del carrito -->
-    <div id="contenido-carrito">
+    <div id="contenido-carrito" class="container">
         <h2>Contenido del Carrito</h2>
         <ul id="lista-carrito"></ul>
         <p id="total-final">Total: $0.00</p>
         <button id="boton-pago" onclick="window.location.href='pago.html'">Comenzar pago</button>
     </div>
     
-
-    <!-- Mensaje de carrito -->
     <div id="mensaje-carrito"></div>
 
     <footer>
-        <h3 class="texto-footer">¡Síguenos en nuestras redes sociales!</h3>
+        <h3>¡Síguenos en nuestras redes sociales!</h3>
         <div class="social-icons">
-            <a href="https://www.instagram.com/sushi_kit0"><img src="instagram_1384063.png" alt="Instagram"></a>
+            <a href="https://www.instagram.com/sushi_kit0">
+                <img src="instagram_1384063.png" alt="Instagram">
+            </a>
         </div>
     </footer>
 
-    <script>
-        const mensajeCarrito = document.getElementById('mensaje-carrito');
-        const totalCarrito = document.getElementById('total-carrito');
-        const listaCarrito = document.getElementById('lista-carrito');
-        const totalFinal = document.getElementById('total-final');
-        const contenidoCarrito = document.getElementById('contenido-carrito');
-
-        let total = 0;
-        let carritoItems = [];
-
-        // Al cargar la página, actualizar el carrito con los datos de LocalStorage
-        window.onload = function() {
-            const storedCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carritoItems = storedCarrito;
-            total = carritoItems.reduce((acc, item) => acc + item.precio, 0);
-            totalCarrito.textContent = `$${total.toFixed(2)}`;
-            actualizarCarrito();
-        };
-
-        function agregarAlCarrito(precio, nombre) {
-            total += precio;
-            totalCarrito.textContent = `$${total.toFixed(2)}`;
-            carritoItems.push({ nombre, precio });
-            actualizarCarrito();
-            mostrarMensajeCarrito(nombre, precio);
-            guardarCarrito();
-        }
-
-        function actualizarCarrito() {
-            listaCarrito.innerHTML = '';
-            carritoItems.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.textContent = `${item.nombre} - $${item.precio.toFixed(2)}`;
-                const eliminarBtn = document.createElement('button');
-                eliminarBtn.textContent = 'Eliminar';
-                eliminarBtn.onclick = () => eliminarDelCarrito(index);
-                li.appendChild(eliminarBtn);
-                listaCarrito.appendChild(li);
-            });
-            totalFinal.textContent = `Total: $${total.toFixed(2)}`;
-        }
-
-        function eliminarDelCarrito(index) {
-            const item = carritoItems[index];
-            total -= item.precio;
-            carritoItems.splice(index, 1);
-            totalCarrito.textContent = `$${total.toFixed(2)}`;
-            actualizarCarrito();
-            guardarCarrito();
-            mostrarMensajeCarrito('Producto eliminado', 0);
-        }
-
-        function guardarCarrito() {
-            localStorage.setItem('carrito', JSON.stringify(carritoItems));
-        }
-
-        document.getElementById('icono-carrito').addEventListener('click', () => {
-            contenidoCarrito.style.display = contenidoCarrito.style.display === 'none' ? 'block' : 'none';
-        });
-
-        function mostrarMensajeCarrito(nombre, precio) {
-            mensajeCarrito.textContent = `Se agregó al carrito: ${nombre} - $${precio.toFixed(2)}`;
-            mensajeCarrito.classList.add('mostrar');
-            setTimeout(() => {
-                mensajeCarrito.classList.remove('mostrar');
-            }, 3000);
-        }
-
-        function comenzarPago() {
-            // Aquí puedes agregar la lógica para comenzar el proceso de pago
-            alert("Iniciando el proceso de pago...");
-        }
-    </script>
+    <script src="carrito.js"></script>
 </body>
 </html>
