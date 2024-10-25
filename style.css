@@ -1,30 +1,28 @@
 /* Reset de box-sizing para un manejo más fácil de los elementos */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #b22222; /* Color de fondo rojo oscuro */
     color: #333;
-    margin: 0;
-    padding: 0;
 }
 
-.container {
-    max-width: 1200px; /* Ancho máximo del contenedor */
-    margin: 0 auto; /* Centrar el contenedor */
-    padding: 0 20px; /* Espacio lateral */
+.container, header, #hero, #menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 header {
-    background-color: #b22222; /* Rojo oscuro estilo Wendy's */
+    background-color: #b22222;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Limite de ancho */
-    margin: 0 auto; /* Centrar */
 }
 
 .logo img {
@@ -32,18 +30,13 @@ header {
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 20px;
+    list-style: none;
+    display: flex;
+    gap: 20px;
 }
 
 nav ul li a {
-    color: rgb(250, 247, 247);
+    color: #faf7f7;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -51,19 +44,19 @@ nav ul li a {
 
 /* Animación para los botones del menú */
 nav ul li a:hover {
-    color: #111110; /* Color cuando se pasa el ratón */
+    color: #111;
     transform: scale(1.1);
 }
 
 #bar {
-    background-color: white; /* Cambia el color aquí si es necesario */
+    background-color: #fff;
     padding: 20px;
 }
 
 #hero {
     background-image: url('images/taco-background.jpg');
     background-size: cover;
-    color: white;
+    color: #fff;
     text-align: center;
     padding: 100px 20px;
 }
@@ -71,40 +64,38 @@ nav ul li a:hover {
 #menu {
     text-align: center;
     padding: 50px;
-    background-color: white;
-    max-width: 1200px; /* Limite de ancho */
-    margin: 20px auto; /* Centrar */
+    background-color: #fff;
 }
 
 .menu-item {
     margin: 20px;
     display: inline-block;
     width: 200px;
-    transition: transform 0.3s ease, opacity 0.3s ease; /* Añadir animación a las imágenes */
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .menu-item img {
-    width: 100%; /* Mantiene el ancho completo del contenedor */
-    height: 150px; /* Ajusta la altura fija que desees */
-    object-fit: cover; /* Asegura que la imagen se ajuste al contenedor */
-    border-radius: 10px; /* Mantiene el borde redondeado */
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* Efectos en las imágenes */
 .menu-item img:hover {
-    opacity: 0.8; /* Se hace ligeramente transparente */
-    transform: translateY(-15px); /* Salta ligeramente */
+    opacity: 0.8;
+    transform: translateY(-15px);
 }
 
 /* Efecto flotante adicional en el contenedor de la imagen */
 .menu-item:hover {
-    transform: translateY(-5px); /* El contenedor también flota ligeramente */
+    transform: translateY(-5px);
 }
 
 footer {
     background-color: #222;
-    color: white;
+    color: #fff;
     text-align: center;
     padding: 20px;
 }
@@ -120,47 +111,24 @@ footer {
     animation: swing 0.8s ease-in-out infinite;
 }
 
-/* Animación de columpio */
 @keyframes swing {
-    0% { transform: rotate(0deg); }
+    0%, 100% { transform: rotate(0deg); }
     25% { transform: rotate(10deg); }
     50% { transform: rotate(-10deg); }
     75% { transform: rotate(5deg); }
-    100% { transform: rotate(0deg); }
 }
 
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
-    nav ul li {
-        display: block;
-        margin: 10px 0;
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
     }
 
     .menu-item {
-        width: 90%; /* Hace los items del menú más anchos en pantallas pequeñas */
+        width: 90%;
     }
-}
 
-/* Nuevas reglas para límites y responsividad */
-body {
-    background-color: #b22222; /* Fondo claro para contraste */
-}
-
-.container {
-    padding: 0 20px; /* Espacio lateral */
-}
-
-header, #hero, #menu {
-    max-width: 1200px; /* Limite de ancho */
-    margin: 0 auto; /* Centrar */
-}
-
-.menu-item img {
-    max-width: 100%; /* Asegura que las imágenes sean responsivas */
-}
-
-/* Ajustes para dispositivos pequeños */
-@media (max-width: 768px) {
     header {
         flex-direction: column;
         align-items: flex-start;
@@ -172,9 +140,5 @@ header, #hero, #menu {
 
     .texto-principal {
         font-size: 1em;
-    }
-
-    .menu-item img {
-        max-width: 100%; /* Asegura que las imágenes llenen el contenedor en móviles */
     }
 }
